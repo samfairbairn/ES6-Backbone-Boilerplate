@@ -1,0 +1,13 @@
+@import "../../../../styles/vars";
+
+.exampleComponent {
+
+}
+
+.exampleComponent-title {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 10px;
+  color: $color-titleBlue;
+  background: $color-titleBackground;
+}

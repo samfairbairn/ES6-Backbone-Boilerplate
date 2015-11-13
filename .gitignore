@@ -1,0 +1,10 @@
+.DS_Store
+.sass-cache
+pip-log.txt
+.cache/
+dist/
+build/
+node_modules/
+
+# Application data
+.idea/
