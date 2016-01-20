@@ -81,6 +81,7 @@ Common classes such as utils with overwriting styles should use `!important` to 
 				- models/
 				- views/
 					- exampleComponent/
+						- assets/
 						- exampleComponentView.js
 						- exampleComponent.ejs [view template]
 						- exampleComponent.scss [view styles]
@@ -95,7 +96,6 @@ Common classes such as utils with overwriting styles should use `!important` to 
 			- fonts.scss
 		- static/
 			- fonts/
-			- images/
 
 ## Notes
 
@@ -109,7 +109,5 @@ ES6 doesn't support adding properties directly to the class instance so the curr
 
 ## TODO
 
-* Image compression
 * webp support
 * live asset compression/reloading
-* Backbone.radio ?
