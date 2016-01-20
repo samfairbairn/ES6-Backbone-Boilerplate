@@ -1,7 +1,7 @@
 import del from "del";
 import path from "path";
 import gulp from "gulp";
-import open from "open";
+//import open from "open";
 import gulpLoadPlugins from "gulp-load-plugins";
 import packageJson from "../package.json";
 import runSequence from "run-sequence";
@@ -15,18 +15,18 @@ const SETTINGS = settings();
 const PRODUCTION = yargs.argv.p;
 const TARGET = PRODUCTION ? SETTINGS.production.target_dir : SETTINGS.development.dir_target;
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || SETTINGS.ports.backend;
 const plugins = gulpLoadPlugins({camelize: true});
 
 gulp.task('default', () => {
 
     if (PRODUCTION) {
 
-        runSequence('clean', 'build', 'index:prod', 'serve');
+        runSequence('clean', 'build', 'index:prod');
 
     } else {
 
-        runSequence('clean', 'static', 'index:dev', 'serve');
+        runSequence('clean', /*'static',*/ 'index:dev', 'serve');
 
     }
 });
@@ -37,12 +37,12 @@ gulp.task('clean', cb => del(TARGET, {dot: true}, cb));
 
 
 // Copy static assets
-gulp.task('static', () =>
+/*gulp.task('static', () =>
     gulp.src(['src/static/**'])
         .pipe(plugins.changed(TARGET))
         .pipe(gulp.dest(TARGET))
         .pipe(plugins.size({title: 'static'}))
-);
+);*/
 
 
 // Copy our index file and inject css/script imports for this build
@@ -63,7 +63,7 @@ gulp.task('index:prod', () =>
 
 
 // Create a distributable package
-gulp.task('build', ['static'], cb => {
+gulp.task('build', cb => {
     const config = webpackConfig(!PRODUCTION, TARGET, PORT);
 
     webpack(config, (err, stats) => {
